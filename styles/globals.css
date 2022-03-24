@@ -4,6 +4,6 @@
 
 @layer components{
     .navIcon{
-        @apply h-6 cursor-pointer transition duration-150 ease-in-out hover:scale-110
+        @apply h-6 cursor-pointer transition transform duration-150 ease-in-out hover:scale-110
     }
 }
