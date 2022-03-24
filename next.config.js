@@ -4,7 +4,8 @@ const nextConfig = {
   images:{
     domains:[
       "www.instagram.com",
-      
+      "lh3.googleusercontent.com",
+      "links.papareact.com"
     ]
   }
 }

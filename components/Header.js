@@ -14,7 +14,7 @@ function Header() {
     <div className="bg-white border-b shadow-md sticky top-0 z-50 p-3 ">
       <div className="flex justify-between max-w-7xl lg:mx-auto">
         {/* Left */}
-        <div className="relative w-28    cursor-pointer">
+        <div className="relative w-28 cursor-pointer">
           <Image
             src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
             alt="instagram"
@@ -38,13 +38,14 @@ function Header() {
         {/* Right */}
         <div className="flex items-center space-x-5 justify-end">
           <HomeIcon className="navIcon" />
+
           <PaperAirplaneIcon className="navIcon rotate-45" />
           <PlusCircleIcon className="navIcon" />
           <PlayIcon className="navIcon" />
           <HeartIcon className="navIcon" />
           <img
             src="https://lh3.googleusercontent.com/ogw/ADea4I6v19AavCMiVveRiMmjMcF9N7sbF4fnx6D3nBDw=s32-c-mo"
-            alt="instagram"
+            alt="profile"
             className="object-contain h-8 rounded-full cursor-pointer"
           />
         </div>
