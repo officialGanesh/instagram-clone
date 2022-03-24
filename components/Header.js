@@ -8,8 +8,12 @@ import {
   SearchIcon,
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
+import { signIn, useSession } from "next-auth/react";
 
 function Header() {
+
+  const { data: session, status } = useSession()
+
   return (
     <div className="bg-white border-b shadow-md sticky top-0 z-50 p-3 ">
       <div className="flex justify-between max-w-7xl lg:mx-auto">
@@ -38,16 +42,26 @@ function Header() {
         {/* Right */}
         <div className="flex items-center space-x-5 justify-end">
           <HomeIcon className="navIcon" />
-
-          <PaperAirplaneIcon className="navIcon rotate-45" />
-          <PlusCircleIcon className="navIcon" />
-          <PlayIcon className="navIcon" />
-          <HeartIcon className="navIcon" />
-          <img
-            src="https://lh3.googleusercontent.com/ogw/ADea4I6v19AavCMiVveRiMmjMcF9N7sbF4fnx6D3nBDw=s32-c-mo"
-            alt="profile"
-            className="object-contain h-8 rounded-full cursor-pointer"
-          />
+          {session ? (
+            <>
+              <PaperAirplaneIcon className="navIcon rotate-45" />
+              <PlusCircleIcon className="navIcon" />
+              <PlayIcon className="navIcon" />
+              <HeartIcon className="navIcon !mr-3" />
+              <Image
+                src={session?.user.image}
+                alt="profile"
+                height={40}
+                width={40}
+                className="object-contain h-8 rounded-full cursor-pointer"
+                
+              />
+            </>
+          ) : (
+            <button className="text-sm text-blue-400 cursor-pointer font-semibold" onClick={signIn}>
+              SIGN IN
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -5,7 +5,8 @@ const nextConfig = {
     domains:[
       "www.instagram.com",
       "lh3.googleusercontent.com",
-      "links.papareact.com"
+      "links.papareact.com",
+      "platform-lookaside.fbsbx.com"
     ]
   }
 }
