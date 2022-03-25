@@ -9,10 +9,12 @@ import {
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
 import { signIn, useSession } from "next-auth/react";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atoms/ModalAtom";
 
 function Header() {
-
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
+  const [openModal, setOpenModal] = useRecoilState(modalState)
 
   return (
     <div className="bg-white border-b shadow-md sticky top-0 z-50 p-3 ">
@@ -45,7 +47,11 @@ function Header() {
           {session ? (
             <>
               <PaperAirplaneIcon className="navIcon rotate-45" />
-              <PlusCircleIcon className="navIcon" />
+              <PlusCircleIcon className="navIcon" 
+              onClick={() => {
+                setOpenModal(true)
+              }}
+              />
               <PlayIcon className="navIcon" />
               <HeartIcon className="navIcon !mr-3" />
               <Image
@@ -54,11 +60,13 @@ function Header() {
                 height={40}
                 width={40}
                 className="object-contain h-8 rounded-full cursor-pointer"
-                
               />
             </>
           ) : (
-            <button className="text-sm text-blue-400 cursor-pointer font-semibold" onClick={signIn}>
+            <button
+              className="text-sm text-blue-400 cursor-pointer font-semibold"
+              onClick={signIn}
+            >
               SIGN IN
             </button>
           )}
