@@ -1,45 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Post from "./Post";
 import { useSession } from "next-auth/react";
+import { onSnapshot, orderBy, query } from "firebase/firestore";
+import { colRef, db } from "../firebase";
 
 function Posts() {
-  const dummy_posts = [
-    {
-      id: 1,
-      username: "Ganesh",
-      profileImg:
-        "https://lh3.googleusercontent.com/ogw/ADea4I6v19AavCMiVveRiMmjMcF9N7sbF4fnx6D3nBDw=s32-c-mo",
-      img: "https://lh3.googleusercontent.com/ogw/ADea4I6v19AavCMiVveRiMmjMcF9N7sbF4fnx6D3nBDw=s32-c-mo",
-      caption: "This is dummy post",
-    },
-    {
-      id: 2,
-      username: "Ganesh",
-      profileImg:
-        "https://lh3.googleusercontent.com/ogw/ADea4I6v19AavCMiVveRiMmjMcF9N7sbF4fnx6D3nBDw=s32-c-mo",
-      img: "https://lh3.googleusercontent.com/ogw/ADea4I6v19AavCMiVveRiMmjMcF9N7sbF4fnx6D3nBDw=s32-c-mo",
-      caption: "This is dummy post",
-    },
-    {
-      id: 3,
-      username: "Ganesh",
-      profileImg:
-        "https://lh3.googleusercontent.com/ogw/ADea4I6v19AavCMiVveRiMmjMcF9N7sbF4fnx6D3nBDw=s32-c-mo",
-      img: "https://lh3.googleusercontent.com/ogw/ADea4I6v19AavCMiVveRiMmjMcF9N7sbF4fnx6D3nBDw=s32-c-mo",
-      caption: "This is dummy post",
-    },
-  ];
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    return onSnapshot(
+      query(colRef),
+      orderBy("timestamp", "desc"),
+      (snapshot) => {
+        setPosts(snapshot.docs);
+      }
+    );
+  }, [db]);
+
   return (
     <div>
       {session &&
-        dummy_posts.map((post) => (
+        posts.map((post) => (
           <Post
             key={post.id}
-            username={post.username}
-            profileImg={post.profileImg}
-            avatar={post.img}
-            caption={post.caption}
+            id={post.id}
+            username={post.data().username}
+            profileImg={post.data().profileImg}
+            avatar={post.data().image}
+            caption={post.data().caption}
           />
         ))}
     </div>

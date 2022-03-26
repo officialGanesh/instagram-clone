@@ -6,7 +6,8 @@ const nextConfig = {
       "www.instagram.com",
       "lh3.googleusercontent.com",
       "links.papareact.com",
-      "platform-lookaside.fbsbx.com"
+      "platform-lookaside.fbsbx.com",
+      "firebasestorage.googleapis.com"
     ]
   }
 }
